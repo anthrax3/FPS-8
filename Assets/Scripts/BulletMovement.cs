@@ -6,6 +6,7 @@ public class BulletMovement : MonoBehaviour {
     public float speed;
     public int damage;
     private bool collide = false;
+	public bool playerbullet = true;
     void Awake()
     {
 
@@ -32,13 +33,17 @@ public class BulletMovement : MonoBehaviour {
             
             if (other.CompareTag("Enemy"))
             {
-                
                 other.GetComponent<EnemyHealth>().TakeDamage(damage);
             }
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && !playerbullet) //player can't hurt self
             {
                 other.GetComponent<PlayerHealth>().PlayerLoseHealth(damage);
             }
+			if (other.CompareTag ("Player") && playerbullet) 
+			{
+				collide = false;
+				return;
+			}
             Destroy(gameObject);
 
         }

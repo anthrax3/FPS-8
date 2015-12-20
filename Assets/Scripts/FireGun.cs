@@ -14,6 +14,9 @@ public class FireGun : MonoBehaviour {
     public AudioSource reloadAudio;
     public AudioSource fireAudio;
     private bool fire_flag = false;
+	public GameObject no_ammo_icon;
+	public int damage = 0;
+	public int speed = 0;
 
     // Use this for initialization
     void Start()
@@ -27,8 +30,15 @@ public class FireGun : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		if (reload == false && ammo_in_clip == 0) {
+			no_ammo_icon.SetActive (true);
+		} 
+		else 
+		{
+			no_ammo_icon.SetActive (false);
+		}
 
-        if (!reload && !fire_flag)
+		if (!fire_flag && !reload)
         {
             if (ammo_in_clip != 0  &&Input.GetMouseButtonDown(0))
             {
@@ -36,13 +46,14 @@ public class FireGun : MonoBehaviour {
                 ammo_in_clip--;
                 gun_anim.SetBool("Fire", true);
 
-                Instantiate(bullet, transform.position + transform.forward*(transform.localScale.z), transform.rotation);
+                //Instantiate(bullet, transform.position + transform.forward*(transform.localScale.z), transform.rotation);
             }
             bool reloadGun = Input.GetKeyDown("r");
             if (reloadGun)
             {
                 reload = true;
-                hud_anim.SetBool("Reload", true);
+				no_ammo_icon.SetActive (false);
+                hud_anim.SetTrigger("Reload");
                 gun_anim.SetTrigger("Reload");
                 
             }
@@ -54,12 +65,13 @@ public class FireGun : MonoBehaviour {
     public void reloadedGun()
     {
         reload = false;
-        hud_anim.SetBool("Reload", false);
+        //hud_anim.SetBool("Reload", false);
         ammo_in_clip = clip_size;
     }
 
     public void playReloadAudio()
     {
+		reloadAudio.Stop();
         reloadAudio.Play();
     }
     public void playFireAudio()
@@ -74,6 +86,13 @@ public class FireGun : MonoBehaviour {
         gun_anim.SetBool("Fire", false);
         fire_flag = false;
     }
+
+	public void createBullet()
+	{
+		GameObject test;
+		test = Instantiate(bullet, transform.position + transform.forward*(transform.localScale.z), transform.rotation) as GameObject;
+		test.GetComponent<BulletMovement> ().damage = damage;
+	}
 
 
 

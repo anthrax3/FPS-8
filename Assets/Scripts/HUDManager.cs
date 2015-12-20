@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class HUDManager : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class HUDManager : MonoBehaviour {
     GameObject player;
     PlayerHealth playerhealth;
     bool gameover = false;
+	public Text health_value_display;
 
 
     // Use this for initialization
@@ -28,8 +30,10 @@ public class HUDManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		firegun = gun.GetComponent<FireGun>();
         ammo_count = firegun.ammo_in_clip;
         ammo_display.text = ammo_count.ToString() + "/" + firegun.clip_size.ToString();
+		health_value_display.text = playerhealth.Health.ToString();
 
         if (playerhealth.Health <= 0)
         {
@@ -78,7 +82,8 @@ public class HUDManager : MonoBehaviour {
     public void reloadLevel()
     {
         Time.timeScale = 1.0F;
-        Application.LoadLevel(Application.loadedLevel);
+        //Application.LoadLevel(Application.loadedLevel);
+		SceneManager.LoadScene ("Level0");
     }
 
 

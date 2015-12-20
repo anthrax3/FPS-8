@@ -28,5 +28,6 @@ public class PlayerHealth : MonoBehaviour {
     public void addHealth(int heal)
     {
         Health += heal;
+		Health = Mathf.Clamp(Health, 0,100);
     }
 }
