@@ -9,14 +9,17 @@ public class FireGun : MonoBehaviour {
     Animator hud_anim;
     Animator gun_anim;
     public volatile bool reload = false;
+	public volatile bool active_gun = true;
     public int ammo_in_clip;
     public int clip_size;
     public AudioSource reloadAudio;
     public AudioSource fireAudio;
+	public AudioSource shellAudio;
     private bool fire_flag = false;
 	public GameObject no_ammo_icon;
 	public int damage = 0;
 	public int speed = 0;
+	public int gun_type = 0;
 
     // Use this for initialization
     void Start()
@@ -30,6 +33,8 @@ public class FireGun : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		if (!active_gun)  //if gun not active
+			return;
 		if (reload == false && ammo_in_clip == 0) {
 			no_ammo_icon.SetActive (true);
 		} 
@@ -80,6 +85,12 @@ public class FireGun : MonoBehaviour {
         fireAudio.Play();
     }
 
+	public void playShellsAudio()
+	{
+		shellAudio.Stop ();
+		shellAudio.Play ();
+	}
+
 
     public void exitFire()
     {
@@ -90,10 +101,77 @@ public class FireGun : MonoBehaviour {
 	public void createBullet()
 	{
 		GameObject test;
-		test = Instantiate(bullet, transform.position + transform.forward*(transform.localScale.z), transform.rotation) as GameObject;
-		test.GetComponent<BulletMovement> ().damage = damage;
+		Transform bullettransform = gameObject.transform;
+
+		if (gun_type == 0) {
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			test.GetComponent<BulletMovement> ().damage = damage;
+			test.GetComponent<BulletMovement> ().speed = speed;
+		} else if (gun_type == 1) { //shotgun
+
+		
+
+//			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+//			test.GetComponent<BulletMovement> ().damage = damage;
+//			test.GetComponent<BulletMovement> ().speed = speed;
+
+
+			bullettransform.Rotate (transform.up, 2f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			test.GetComponent<BulletMovement> ().damage = damage;
+			test.GetComponent<BulletMovement> ().speed = speed;
+
+			bullettransform.Rotate (transform.up, -5.5f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			test.GetComponent<BulletMovement> ().damage = damage;
+			test.GetComponent<BulletMovement> ().speed = speed;
+
+			bullettransform.Rotate (transform.up, 3f);
+			bullettransform.Rotate (transform.right, 2f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			test.GetComponent<BulletMovement> ().damage = damage;
+			test.GetComponent<BulletMovement> ().speed = speed;
+
+			bullettransform.Rotate (transform.right, -6f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			test.GetComponent<BulletMovement> ().damage = damage;
+			test.GetComponent<BulletMovement> ().speed = speed;
+
+			bullettransform.Rotate (transform.up, 4f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			test.GetComponent<BulletMovement> ().damage = damage;
+			test.GetComponent<BulletMovement> ().speed = speed;
+
+			bullettransform.Rotate (transform.up, -8f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			test.GetComponent<BulletMovement> ().damage = damage;
+			test.GetComponent<BulletMovement> ().speed = speed;
+
+			bullettransform.Rotate (transform.right, 7f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			test.GetComponent<BulletMovement> ().damage = damage;
+			test.GetComponent<BulletMovement> ().speed = speed;
+
+			bullettransform.Rotate (transform.up, 8f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			test.GetComponent<BulletMovement> ().damage = damage;
+			test.GetComponent<BulletMovement> ().speed = speed;
+
+
+
+	
+
+
+		}
+
 	}
 
+
+	public void SwapOut()
+	{
+		//gameObject.SetActive(false);
+		active_gun = false;
+	}
 
 
 }

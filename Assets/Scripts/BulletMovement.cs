@@ -27,7 +27,7 @@ public class BulletMovement : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
        
-        if (collide == false && other.GetType() == typeof(BoxCollider) )
+		if (collide == false &&  (other.GetType() != typeof(SphereCollider)))
         {
             collide = true;
             
