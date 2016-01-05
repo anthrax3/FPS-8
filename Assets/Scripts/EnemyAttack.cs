@@ -14,6 +14,7 @@ public class EnemyAttack : MonoBehaviour {
     NavMeshAgent nav;
     public AudioSource laserfireAudio;
     bool isDead = false;
+	Rigidbody rb;
 
     // Use this for initialization
     void Start () {
@@ -21,6 +22,8 @@ public class EnemyAttack : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
+		//rb = GetComponent<Rigidbody> ();
+
     }
 	
 	// Update is called once per frame
@@ -29,6 +32,7 @@ public class EnemyAttack : MonoBehaviour {
             {
 
                 transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, player.transform.position - transform.position, Time.deltaTime, 0));
+				
                 if (player_in_range)
                 {
                     time_after_last_attack += Time.deltaTime;
