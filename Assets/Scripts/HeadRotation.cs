@@ -17,7 +17,7 @@ public class HeadRotation : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         rotationX += Input.GetAxis("Mouse X") * speed * Time.deltaTime;
         rotationY += Input.GetAxis("Mouse Y") * speed * Time.deltaTime;

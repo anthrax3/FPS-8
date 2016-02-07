@@ -33,6 +33,8 @@ public class FireGun : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0.0F)
+            return;
 		if (!active_gun)  //if gun not active
 			return;
 		if (reload == false && ammo_in_clip == 0) {
