@@ -15,11 +15,13 @@ public class FireGun : MonoBehaviour {
     public AudioSource reloadAudio;
     public AudioSource fireAudio;
 	public AudioSource shellAudio;
-    private bool fire_flag = false;
+    public bool fire_flag = false;
 	public GameObject no_ammo_icon;
 	public int damage = 0;
 	public int speed = 0;
 	public int gun_type = 0;
+    public Animator anim;
+    public float animation_speed = 1f;
 
     // Use this for initialization
     void Start()
@@ -33,6 +35,7 @@ public class FireGun : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+       // anim.speed = animation_speed;
         if (Time.timeScale == 0.0F)
             return;
 		if (!active_gun)  //if gun not active
@@ -111,51 +114,54 @@ public class FireGun : MonoBehaviour {
 			test.GetComponent<BulletMovement> ().speed = speed;
 		} else if (gun_type == 1) { //shotgun
 
-		
-
-//			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
-//			test.GetComponent<BulletMovement> ().damage = damage;
-//			test.GetComponent<BulletMovement> ().speed = speed;
 
 
-			bullettransform.Rotate (transform.up, 2f);
-			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+            //			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+            //			test.GetComponent<BulletMovement> ().damage = damage;
+            //			test.GetComponent<BulletMovement> ().speed = speed;
+
+
+            //bullettransform = new Vector3(gameObject.transform.localEulerAngles.x)
+
+            //bullettransform.Rotate(transform.up, 2f);
+            test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), Quaternion.Euler(bullettransform.eulerAngles.x + Random.Range(-4f, 4f), bullettransform.eulerAngles.y + Random.Range(-4f, 4f), bullettransform.eulerAngles.z)) as GameObject;
 			test.GetComponent<BulletMovement> ().damage = damage;
 			test.GetComponent<BulletMovement> ().speed = speed;
 
-			bullettransform.Rotate (transform.up, -5.5f);
-			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+            
+            //bullettransform.Rotate (transform.up, -5.5f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), Quaternion.Euler(bullettransform.eulerAngles.x + Random.Range(-4f, 4f), bullettransform.eulerAngles.y + Random.Range(-4f, 4f), bullettransform.eulerAngles.z)) as GameObject;
 			test.GetComponent<BulletMovement> ().damage = damage;
 			test.GetComponent<BulletMovement> ().speed = speed;
 
-			bullettransform.Rotate (transform.up, 3f);
-			bullettransform.Rotate (transform.right, 2f);
-			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			//bullettransform.Rotate (transform.up, 3f);
+			//bullettransform.Rotate (transform.right, 2f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), Quaternion.Euler(bullettransform.eulerAngles.x + Random.Range(-4f, 4f), bullettransform.eulerAngles.y + Random.Range(-4f, 4f), bullettransform.eulerAngles.z)) as GameObject;
 			test.GetComponent<BulletMovement> ().damage = damage;
 			test.GetComponent<BulletMovement> ().speed = speed;
 
-			bullettransform.Rotate (transform.right, -6f);
-			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			//bullettransform.Rotate (transform.right, -6f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), Quaternion.Euler(bullettransform.eulerAngles.x + Random.Range(-4f, 4f), bullettransform.eulerAngles.y + Random.Range(-4f, 4f), bullettransform.eulerAngles.z)) as GameObject;
 			test.GetComponent<BulletMovement> ().damage = damage;
 			test.GetComponent<BulletMovement> ().speed = speed;
 
-			bullettransform.Rotate (transform.up, 4f);
-			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			//bullettransform.Rotate (transform.up, 4f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), Quaternion.Euler(bullettransform.eulerAngles.x + Random.Range(-4f, 4f), bullettransform.eulerAngles.y + Random.Range(-4f, 4f), bullettransform.eulerAngles.z)) as GameObject;
 			test.GetComponent<BulletMovement> ().damage = damage;
 			test.GetComponent<BulletMovement> ().speed = speed;
 
-			bullettransform.Rotate (transform.up, -8f);
-			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			//bullettransform.Rotate (transform.up, -8f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), Quaternion.Euler(bullettransform.eulerAngles.x + Random.Range(-4f, 4f), bullettransform.eulerAngles.y + Random.Range(-4f, 4f), bullettransform.eulerAngles.z)) as GameObject;
 			test.GetComponent<BulletMovement> ().damage = damage;
 			test.GetComponent<BulletMovement> ().speed = speed;
 
-			bullettransform.Rotate (transform.right, 7f);
-			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			//bullettransform.Rotate (transform.right, 7f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), Quaternion.Euler(bullettransform.eulerAngles.x + Random.Range(-4f, 4f), bullettransform.eulerAngles.y + Random.Range(-4f, 4f), bullettransform.eulerAngles.z)) as GameObject;
 			test.GetComponent<BulletMovement> ().damage = damage;
 			test.GetComponent<BulletMovement> ().speed = speed;
 
-			bullettransform.Rotate (transform.up, 8f);
-			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), bullettransform.rotation) as GameObject;
+			//bullettransform.Rotate (transform.up, 8f);
+			test = Instantiate (bullet, transform.position + transform.forward * (transform.localScale.z), Quaternion.Euler(bullettransform.eulerAngles.x + Random.Range(-4f, 4f), bullettransform.eulerAngles.y + Random.Range(-4f, 4f), bullettransform.eulerAngles.z)) as GameObject;
 			test.GetComponent<BulletMovement> ().damage = damage;
 			test.GetComponent<BulletMovement> ().speed = speed;
 

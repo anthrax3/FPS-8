@@ -7,6 +7,7 @@ public class BulletMovement : MonoBehaviour {
     public int damage;
     private bool collide = false;
 	public bool playerbullet = true;
+    public bool randomColors = true;
     void Awake()
     {
 
@@ -14,13 +15,21 @@ public class BulletMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
-	}
+        if (randomColors)
+        {
+            var nColor = new Color(Random.value, Random.value, Random.value, 1f);
+            Material trail = gameObject.GetComponent<TrailRenderer>().material;
+            trail.SetColor("_Color", nColor);
+        }
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate()
     {
-        transform.position += transform.forward * Time.deltaTime * speed;
+        if (collide != true)
+        {
+            transform.position += transform.forward * Time.deltaTime * speed;
+        }
 
     }
 
@@ -44,7 +53,8 @@ public class BulletMovement : MonoBehaviour {
 				collide = false;
 				return;
 			}
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.GetComponent<Renderer>().enabled = false;
 
         }
 

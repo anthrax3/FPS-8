@@ -17,6 +17,7 @@ public class HUDManager : MonoBehaviour {
     PlayerHealth playerhealth;
     bool gameover = false;
 	public Text health_value_display;
+    Animator anim;
 
 
     // Use this for initialization
@@ -24,6 +25,7 @@ public class HUDManager : MonoBehaviour {
         firegun = gun.GetComponent<FireGun>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerhealth = player.GetComponent<PlayerHealth>();
+        anim = gameObject.GetComponent<Animator>();
 
 
     }
@@ -31,6 +33,7 @@ public class HUDManager : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		firegun = gun.GetComponent<FireGun>();
+        anim.speed = firegun.animation_speed;
         ammo_count = firegun.ammo_in_clip;
         ammo_display.text = ammo_count.ToString() + "/" + firegun.clip_size.ToString();
 		health_value_display.text = playerhealth.Health.ToString();
