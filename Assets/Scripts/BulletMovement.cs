@@ -36,7 +36,7 @@ public class BulletMovement : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
        
-		if (collide == false &&  (other.GetType() != typeof(SphereCollider)))
+		if (collide == false &&  (other.GetType() != typeof(SphereCollider)) && !(other.CompareTag("Player") && playerbullet))
         {
             collide = true;
             
