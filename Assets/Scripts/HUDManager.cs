@@ -27,6 +27,7 @@ public class HUDManager : MonoBehaviour {
     public Color not_selected_color = new Color(0f, 0f, 0.1f);
     public float damaged_fade_speed = 3f;
     public RawImage [] gun_selected;
+    public GameObject[] gun_models;
 
 
     // Use this for initialization
@@ -76,7 +77,9 @@ public class HUDManager : MonoBehaviour {
         {
             if (i == gun_manager_script.current_gun)
             {
+
                 gun_selected[i].color = selected_color;
+                gun_models[i].transform.Rotate(new Vector3(0, -45, 0) * Time.deltaTime);
             }
             else
             {
