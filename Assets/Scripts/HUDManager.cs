@@ -42,13 +42,14 @@ public class HUDManager : MonoBehaviour {
         playerhealth = player.GetComponent<PlayerHealth>();
         anim = gameObject.GetComponent<Animator>();
         gun_manager_script = gun_manager.GetComponent<GunManager>();
-
+        Cursor.visible = false;
 
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		firegun = gun.GetComponent<FireGun>();
+        
+        firegun = gun.GetComponent<FireGun>();
         anim.speed = firegun.animation_speed;
         ammo_count = firegun.ammo_in_clip;
         ammo_display.text = ammo_count.ToString() + "/" + firegun.clip_size.ToString();
@@ -79,6 +80,7 @@ public class HUDManager : MonoBehaviour {
             }
             gameoverscreen.SetActive(true);
             Time.timeScale = 0.0F;
+            Cursor.visible = true;
         }
 
 
@@ -109,6 +111,7 @@ public class HUDManager : MonoBehaviour {
             if (buttonpress)
             {
                 PauseGame();
+
             }
         }
     }
@@ -120,9 +123,11 @@ public class HUDManager : MonoBehaviour {
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0.0F;
+            Cursor.visible = true;
         }
         else
         {
+            Cursor.visible = false;
             pauseMenu.SetActive(false);
             Time.timeScale = 1.0F;
         }
