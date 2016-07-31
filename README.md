@@ -20,5 +20,10 @@ A health pack is in the middle of the level that respawn after being picked up a
 
 Currently, there is only one level. Pressing esc lets you pause the game, allowing you to quit or restart.
 
+Screenshot:
+<p align="center">
+  <img src="screenshots/screenshot0.png" />
+  
+</p>
 
 
