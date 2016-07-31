@@ -7,6 +7,9 @@ public class EnemyHealth : MonoBehaviour {
     public int health;
     Animator anim;
     public AudioSource deathSound;
+    public int points_awarded;
+    public GameObject hud;
+    HUDManager hud_manager;
    
     bool isDead = false;
 
@@ -14,6 +17,7 @@ public class EnemyHealth : MonoBehaviour {
     void Awake()
     {
         anim = GetComponent<Animator>();
+        hud_manager = GameObject.Find("HUD").GetComponent<HUDManager>();
     }
 
 
@@ -26,7 +30,7 @@ public class EnemyHealth : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
@@ -35,6 +39,7 @@ public class EnemyHealth : MonoBehaviour {
         if (health <= 0 && !isDead)
         {
             isDead = true;
+            hud_manager.update_score(points_awarded);
             
             anim.SetTrigger("isDead");
             //DestroyObject();

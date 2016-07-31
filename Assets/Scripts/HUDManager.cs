@@ -19,6 +19,9 @@ public class HUDManager : MonoBehaviour {
     PlayerHealth playerhealth;
     bool gameover = false;
 	public Text health_value_display;
+    public Text score_text;
+    int player_score = 0;
+    public Text final_score;
     Animator anim;
     public Image damaged_image;
     public Color damaged_color = new Color(1f, 0f, 0f, 0.1f);
@@ -28,6 +31,8 @@ public class HUDManager : MonoBehaviour {
     public float damaged_fade_speed = 3f;
     public RawImage [] gun_selected;
     public GameObject[] gun_models;
+    public GameObject[] hud_aspects;
+
 
 
     // Use this for initialization
@@ -62,10 +67,16 @@ public class HUDManager : MonoBehaviour {
             damaged_image.color = Color.Lerp(damaged_image.color, Color.clear, damaged_fade_speed * Time.deltaTime);
         }
 		health_value_display.text = playerhealth.Health.ToString();
+        score_text.text = player_score.ToString();
 
         if (playerhealth.Health <= 0)
         {
             gameover = true;
+            final_score.text = "Final Score: " + score_text.text;
+            foreach (var obj in hud_aspects)
+            {
+                obj.SetActive(false);
+            }
             gameoverscreen.SetActive(true);
             Time.timeScale = 0.0F;
         }
@@ -121,6 +132,11 @@ public class HUDManager : MonoBehaviour {
     public void exitReload()
     {
         firegun.reloadedGun();
+    }
+
+    public void update_score(int score)
+    {
+        player_score += score;
     }
 
     public void reloadLevel()
